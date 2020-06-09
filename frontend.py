@@ -1,6 +1,7 @@
 from tkinter import * 
-import backend
+from backend import Databse
 
+databse = Databse()
 selected_tuple = None
 
 def get_selected_row(event):
@@ -22,28 +23,28 @@ def get_selected_row(event):
 # view function
 def view_command():
     list_view.delete(0, END)
-    for row in backend.view():
+    for row in databse.view():
         list_view.insert(END, row)
 
 # search function
 def search_command():
     list_view.delete(0,END)
-    for row in backend.search(title_text.get(), author_text.get(), year_text.get(), isbn_text.get()):
+    for row in databse.search(title_text.get(), author_text.get(), year_text.get(), isbn_text.get()):
         list_view.insert(END, row)
 
 # insert function
 def add_command():
-    backend.insert(title_text.get(), author_text.get(), year_text.get(), isbn_text.get())
+    databse.insert(title_text.get(), author_text.get(), year_text.get(), isbn_text.get())
     list_view.delete(0, END)
     list_view.insert(END, (title_text.get(), author_text.get(), year_text.get(), isbn_text.get()))
 
 # Delete function
 def delete_command():
-    backend.delete(selected_tuple[0])
+    databse.delete(selected_tuple[0])
 
 # Update function
 def update_command():
-    backend.update(selected_tuple[0], selected_tuple[1], selected_tuple[2], selected_tuple[3], selected_tuple[4])
+    databse.update(selected_tuple[0], selected_tuple[1], selected_tuple[2], selected_tuple[3], selected_tuple[4])
 
 # Set up a main application window
 window = Tk()
